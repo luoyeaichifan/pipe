@@ -26,7 +26,7 @@
             <div class="fn-right">
                 Powered by <a href="https://b3log.org/" target="_blank">B3log 开源</a> •
                 <a href="https://hacpai.com/tag/Pipe" target="_blank">Pipe</a> •
-                Theme <a href="https://github.com/b3log/pipe-themes" target="_blank">Fara</a>
+                Theme <a href="https://github.com/luoyeaichifan/pipe-themes" target="_blank">Fara</a>
             </div>
         </div>
     </div>
@@ -34,7 +34,6 @@
 
 <script type="text/javascript"
         id="script"
-        data-blogurl="{{.BlogURL}}"
         data-isLogin="{{if eq .User.URole 0}}false{{else}}true{{end}}"
         {{if .Article}}
         src="{{.Conf.StaticServer}}/theme/x/{{.Setting.ThemeName}}/js/article.min.js?{{.Conf.StaticResourceVersion}}"

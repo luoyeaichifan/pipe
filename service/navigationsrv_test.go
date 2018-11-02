@@ -19,7 +19,7 @@ package service
 import (
 	"testing"
 
-	"github.com/b3log/pipe/model"
+	"github.com/luoyeaichifan/pipe/model"
 )
 
 func TestConsoleGetNavigations(t *testing.T) {

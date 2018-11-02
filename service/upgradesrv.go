@@ -19,7 +19,7 @@ package service
 import (
 	"sync"
 
-	"github.com/b3log/pipe/model"
+	"github.com/luoyeaichifan/pipe/model"
 )
 
 // Upgrade service.
@@ -32,7 +32,7 @@ type upgradeService struct {
 }
 
 const (
-	fromVer = "1.8.2"
+	fromVer = "1.8.1"
 	toVer   = model.Version
 )
 
@@ -42,7 +42,7 @@ func (srv *upgradeService) Perform() {
 	}
 	sysVerSetting := Setting.GetSetting(model.SettingCategorySystem, model.SettingNameSystemVer, 1)
 	if nil == sysVerSetting {
-		logger.Fatalf("system state is error, please contact developer: https://github.com/b3log/pipe/issues/new")
+		logger.Fatalf("system state is error, please contact developer: https://github.com/luoyeaichifan/pipe/issues/new")
 	}
 
 	currentVer := sysVerSetting.Value

@@ -2,20 +2,25 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.2.1.0, Nov 1, 2018
+ * @version 0.1.0.0, Dec 11, 2017
  */
 
 import $ from 'jquery'
 import Icon from './symbol'
 import {
-  initPjax,
   KillBrowser,
   PreviewImg,
 } from '../../../js/common'
 
 const Common = {
-  initEvent: () => {
-    $("a.tag").each(function () {
+  /**
+   * @description 页面初始化
+   */
+  init: () => {
+    PreviewImg()
+    KillBrowser()
+
+    $("a.tag").each(function (i) {
       $(this).addClass("tag--color" + Math.ceil(Math.random() * 4));
     });
 
@@ -45,19 +50,6 @@ const Common = {
         $('.side > .fn-none').hide()
       }, 300)
     });
-  },
-  /**
-   * @description 页面初始化
-   */
-  init: () => {
-    PreviewImg()
-    KillBrowser()
-    initPjax(() => {
-      $(window).scroll();
-      Common.initEvent()
-    })
-
-    Common.initEvent()
 
     $(window).scroll(function () {
       if ($('.article__item').length > 0) {
@@ -85,18 +77,13 @@ const Common = {
     if (count < max) {
       setTimeout(() => {
         increase(max, time, id, ++count)
-        if (document.getElementById(id)) {
-          document.getElementById(id).innerHTML = count
-        }
+        document.getElementById(id).innerHTML = count
       }, time / max)
     }
   }
 }
 
-if (!window.increase) {
-  window.increase = Common.increase
-  Icon()
-  Common.init()
-}
-
+window.increase = Common.increase
+Icon()
+Common.init()
 export default Common

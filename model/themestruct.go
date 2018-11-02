@@ -19,7 +19,7 @@ package model
 import (
 	"html/template"
 
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/util"
 )
 
 // ThemeArticle represents theme article.

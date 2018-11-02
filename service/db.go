@@ -19,8 +19,8 @@ package service
 import (
 	"os"
 
-	"github.com/b3log/pipe/log"
-	"github.com/b3log/pipe/model"
+	"github.com/luoyeaichifan/pipe/log"
+	"github.com/luoyeaichifan/pipe/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"  // mysql
 	_ "github.com/jinzhu/gorm/dialects/sqlite" // sqlite

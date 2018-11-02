@@ -6,8 +6,6 @@
     {{template "head/3rdstatistic" .}}
 </head>
 <body>
-<div id="pjax">
-{{if .pjax}}{{noescape "<!---- pjax {#pjax} start ---->"}}{{end}}
 {{template "Medium/header" .}}
 {{template "Medium/nav" .}}
 <div class="main">
@@ -38,8 +36,6 @@
   increase({{len .Tags}}, 1000, 'tagArticleCount', 0)
   addLevelToTag()
 </script>
-{{if .pjax}}{{noescape "<!---- pjax {#pjax} end ---->"}}{{end}}
-</div>
 </body>
 </html>
 {{end}}

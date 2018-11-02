@@ -26,8 +26,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/b3log/pipe/model"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/model"
+	"github.com/luoyeaichifan/pipe/util"
 	"github.com/jinzhu/gorm"
 )
 
@@ -438,7 +438,7 @@ func (srv *articleService) UpdateArticle(article *model.Article) (err error) {
 		}
 	}()
 	if oldArticle.CreatedAt.Format("200601") != article.CreatedAt.Format("200601") {
-		// https://github.com/b3log/pipe/issues/106
+		// https://github.com/luoyeaichifan/pipe/issues/106
 		if err = Archive.UnArchiveArticleWithoutTx(tx, oldArticle); nil != err {
 			return
 		}

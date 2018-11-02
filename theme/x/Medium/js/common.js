@@ -2,13 +2,12 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.3.0.0, Nov 1, 2018
+ * @version 0.1.0.0, Jan 18, 2018
  */
 
 import $ from 'jquery'
 import Icon from './symbol'
 import {
-  initPjax,
   KillBrowser,
   PreviewImg,
 } from '../../../js/common'
@@ -20,7 +19,6 @@ const Common = {
   init: () => {
     PreviewImg()
     KillBrowser()
-    initPjax()
 
     $(window).scroll(function () {
       if ($('#headerNav').length === 0) {
@@ -41,9 +39,7 @@ const Common = {
     if (count < max) {
       setTimeout(() => {
         increase(max, time, id, ++count)
-        if (document.getElementById(id)) {
-          document.getElementById(id).innerHTML = count
-        }
+        document.getElementById(id).innerHTML = count
       }, time / max)
     }
   },
@@ -74,11 +70,8 @@ const Common = {
   }
 }
 
-if (!window.increase) {
-  window.increase = Common.increase
-  window.addLevelToTag = Common.addLevelToTag
-  Icon()
-  Common.init()
-}
-
+window.increase = Common.increase
+window.addLevelToTag = Common.addLevelToTag
+Icon()
+Common.init()
 export default Common

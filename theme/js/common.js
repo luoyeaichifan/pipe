@@ -2,13 +2,11 @@
  * @fileoverview common tool for every theme
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.4.0.1, Oct 31, 2018
+ * @version 0.3.1.0, Jul 8, 2018
  */
 
 import $ from 'jquery'
 import config from '../../pipe.json'
-import NProgress from 'nprogress'
-import pjax from './lib/pjax'
 
 /**
  * @description 初始化 markdown 解析
@@ -310,46 +308,6 @@ ${selectionObj.toString()}${genCopy(author, link).join('<br>')}</div>`)
       $('#pipeFixCopy').remove()
     }, 200)
   })
-}
-
-/**
- * @description 初始化 pjax
- * @param {function} cb pjax 成功加载后的回调函数
- */
-export const initPjax = (cb) => {
-  if ($('#pjax').length === 1) {
-    pjax({
-      selector: 'a',
-      container: '#pjax',
-      show: '',
-      cache: false,
-      storage: true,
-      titleSuffix: '',
-      filter: function(href){
-        if (href.indexOf('/atom') > -1  ||
-          href.indexOf(config.Server + '/admin') > -1) {
-          return true
-        } else if (href.indexOf($('#script').data('blogurl')) > -1) {
-          return false
-        }
-        return true
-      },
-      callback: function () {
-        LazyLoadCSSImage()
-        LazyLoadImage()
-        ParseMarkdown()
-        cb && cb()
-      }
-    });
-    NProgress.configure({ showSpinner: false });
-    $('#pjax').bind('pjax.start', function(){
-      NProgress.start();
-    });
-    $('#pjax').bind('pjax.end', function(){
-      window.scroll(window.scrollX,0)
-      NProgress.done();
-    });
-  }
 }
 
 (() => {

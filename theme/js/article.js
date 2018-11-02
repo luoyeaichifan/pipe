@@ -2,12 +2,12 @@
  * @fileoverview article tool for every theme
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.3.0.0, Nov 1, 2018
+ * @version 0.2.0.0, Oct 19, 2017
  */
 
 import $ from 'jquery'
-import { Editor } from './lib/b3log/editor/index'
-import { LazyLoadCSSImage, LazyLoadImage, ParseMarkdown } from './common'
+import {Editor} from "./lib/luoyeaichifan/editor/index";
+import {LazyLoadCSSImage, LazyLoadImage, ParseMarkdown} from './common'
 import config from '../../pipe.json'
 
 /**
@@ -15,8 +15,7 @@ import config from '../../pipe.json'
  * @param {string} tocId 目录 id
  * @param {string} articleId 目录对应正文 id
  */
-export const InitToc = (
-  tocId, articleId, articleOffset = 0, activeClass = 'toc__item--active') => {
+export const InitToc = (tocId, articleId, articleOffset = 0, activeClass = 'toc__item--active') => {
   const $toc = $(`#${tocId}`)
   const $articleTocs = $(`#${articleId} [id^=toc]`)
   let tocPositionArray = []
@@ -36,7 +35,7 @@ export const InitToc = (
     $articleTocs.each(function () {
       tocPositionArray.push({
         id: this.id,
-        offsetTop: this.offsetTop,
+        offsetTop: this.offsetTop
       })
     })
 
@@ -46,14 +45,11 @@ export const InitToc = (
       if (scrollTop < tocPositionArray[i].offsetTop - articleOffset) {
         $toc.find('li').removeClass(activeClass)
         const index = i > 0 ? i - 1 : 0
-        $toc.find(`a[href="#${$articleTocs[index].id}"]`).
-          parent().
-          addClass(activeClass)
+        $toc.find(`a[href="#${$articleTocs[index].id}"]`).parent().addClass(activeClass)
         break
       }
     }
-    if (scrollTop >= $articleTocs[$articleTocs.length - 1].offsetTop -
-      articleOffset) {
+    if (scrollTop >= $articleTocs[$articleTocs.length - 1].offsetTop - articleOffset) {
       $toc.find('li').removeClass(activeClass)
       $toc.find('li:last').addClass(activeClass)
     }
@@ -65,43 +61,40 @@ export const InitToc = (
 export const InitHljs = () => {
   const $codes = $('pre code')
   if ($codes.length === 0) {
-    return false
+    return false;
   }
 
   var parseHljs = function () {
     $codes.each(function (i, block) {
-      var $it = $(this)
+      var $it = $(this);
       if ($it.hasClass('language-flow')) {
-        return
+        return;
       }
 
       if ($it.parent().find('.pipe-code__copy').length > 0) {
-        return
+        return;
       }
 
-      $it.css({'max-height': $(window).height() - 40}).
-        parent().
-        prepend(`<textarea>${$it.text()}</textarea><div 
+      $it.css({'max-height': $(window).height() - 40}).parent().prepend(`<textarea>${$it.text()}</textarea><div 
           aria-label="copy" onmouseover="this.setAttribute('aria-label', 'Copy')" 
           class="pipe-code__copy pipe-tooltipped pipe-tooltipped--w" 
-          onclick="this.previousElementSibling.select();document.execCommand('copy');this.setAttribute('aria-label','Copied')"><svg><use xlink:href="#copy"></use></svg></div>`)
+          onclick="this.previousElementSibling.select();document.execCommand('copy');this.setAttribute('aria-label','Copied')"><svg><use xlink:href="#copy"></use></svg></div>`);
 
-      hljs.highlightBlock(block)
-    })
+      hljs.highlightBlock(block);
+    });
   }
 
   if (typeof hljs === 'undefined') {
     $.ajax({
-      method: 'GET',
-      url: (config.StaticServer || config.Server) +
-      '/theme/js/lib/highlight.min.js',
+      method: "GET",
+      url: (config.StaticServer || config.Server) + "/theme/js/lib/highlight.min.js",
       dataType: 'script',
-      cache: true,
+      cache: true
     }).done(function () {
-      parseHljs()
-    })
+      parseHljs();
+    });
   } else {
-    parseHljs()
+    parseHljs();
   }
 }
 
@@ -128,7 +121,7 @@ export const ShowEditor = (reply, id, commentId) => {
   $('body').css('padding-bottom', $editor.outerHeight() + 'px')
   $('#pipeEditorReplyTarget').text(reply)
   $('#pipeEditorComment textarea').focus()
-}
+};
 
 export const InitComment = () => {
   /**
@@ -148,13 +141,13 @@ export const InitComment = () => {
   })
 
   // bottom reply
-  $('#pipeCommentsWrap').on('click', '#pipeCommentBottomComment', function () {
+  $('body').on('click', '#pipeCommentBottomComment', function () {
     const $bottomComment = $(this)
     ShowEditor($bottomComment.data('text'), $bottomComment.data('id'))
   })
 
   // comment show reply
-  $('#pipeCommentsWrap').on('click', '#pipeComments .fn-pointer', function () {
+  $('body').on('click', '#pipeComments .fn-pointer', function () {
     const $it = $(this)
     if ($it.hasClass('disabled')) {
       return
@@ -168,13 +161,12 @@ export const InitComment = () => {
           queue: false,
           complete: () => {
             $it.removeClass('disabled')
-          },
+          }
         })
         return
       }
       $.ajax({
-        url: `${$('#pipeEditorComment').data('blogurl')}/comments/${$it.data(
-          'id')}/replies`,
+        url: `${$('#pipeEditorComment').data('blogurl')}/comments/${$it.data('id')}/replies`,
         type: 'GET',
         success: (result) => {
           if (result.code === 0) {
@@ -199,7 +191,7 @@ export const InitComment = () => {
               queue: false,
               complete: () => {
                 $it.removeClass('disabled')
-              },
+              }
             })
             LazyLoadImage()
             LazyLoadCSSImage()
@@ -209,7 +201,7 @@ export const InitComment = () => {
             alert(result.msg)
             $it.removeClass('disabled')
           }
-        },
+        }
       })
     } else {
       $svg.addClass('pipe-comment__chevron-down')
@@ -217,52 +209,50 @@ export const InitComment = () => {
         queue: false,
         complete: () => {
           $it.removeClass('disabled')
-        },
+        }
+      })
+    }
+  });
+
+  // comment remove
+  $('body').on('click', '#pipeComments .pipe-comment__btn--danger', function () {
+    const $it = $(this)
+    if (confirm($it.data('label'))) {
+      $.ajax({
+        url: `${$('#pipeEditorComment').data('blogurl')}/comments/${$it.data('id')}`,
+        type: 'DELETE',
+        success: (result) => {
+          if (result.code === 0) {
+            const $commentsCnt = $('#pipeCommentsCnt')
+            const $comments = $('#pipeComments')
+            const $item = $(`#pipeComment${$it.data('id')}`)
+
+            if ($('#pipeComments > div > section').length === 1) {
+              $comments.addClass('pipe-comment__null')
+                .html(`<svg><use xlink:href="#icon-reply"></use></svg>
+${$it.data('label2')}`).click(function () {
+                ShowEditor($comments.data('title'), $comments.data('id'))
+              })
+            } else {
+              $item.remove()
+              $commentsCnt.text(parseInt($commentsCnt.text()) - 1)
+            }
+          } else {
+            alert(result.msg)
+          }
+        }
       })
     }
   })
 
-  // comment remove
-  $('#pipeCommentsWrap').
-    on('click', '#pipeComments .pipe-comment__btn--danger', function () {
-      const $it = $(this)
-      if (confirm($it.data('label'))) {
-        $.ajax({
-          url: `${$('#pipeEditorComment').
-            data('blogurl')}/comments/${$it.data('id')}`,
-          type: 'DELETE',
-          success: (result) => {
-            if (result.code === 0) {
-              const $commentsCnt = $('#pipeCommentsCnt')
-              const $comments = $('#pipeComments')
-              const $item = $(`#pipeComment${$it.data('id')}`)
-
-              if ($('#pipeComments > div > section').length === 1) {
-                $comments.addClass('pipe-comment__null').html(`<svg><use xlink:href="#icon-reply"></use></svg>
-${$it.data('label2')}`).click(function () {
-                  ShowEditor($comments.data('title'), $comments.data('id'))
-                })
-              } else {
-                $item.remove()
-                $commentsCnt.text(parseInt($commentsCnt.text()) - 1)
-              }
-            } else {
-              alert(result.msg)
-            }
-          },
-        })
-      }
-    })
-
   // comment reply
-  $('#pipeCommentsWrap').
-    on('click', '#pipeComments .pipe-comment__btn--reply', function () {
-      const $it = $(this)
-      ShowEditor($it.data('title'), $it.data('id'), $it.data('commentid'))
-    })
+  $('body').on('click', '#pipeComments .pipe-comment__btn--reply', function () {
+    const $it = $(this)
+    ShowEditor($it.data('title'), $it.data('id'), $it.data('commentid'))
+  })
 
   if ($('#pipeEditorComment').length === 0) {
-    return
+    return;
   }
 
   // init Editor
@@ -284,7 +274,7 @@ ${$it.data('label2')}`).click(function () {
       view: label[8] + ' <ctrl+d>',
       question: label[9],
       fullscreen: label[10] + ' <ctrl+shift+a>',
-      emojiTip: 'EMOJI CHEAT SHEET',
+      emojiTip: 'EMOJI CHEAT SHEET'
     },
     height: 180,
     keyup: (event) => {
@@ -292,44 +282,44 @@ ${$it.data('label2')}`).click(function () {
     },
     esc: _hideEditor,
     ctrlEnter: () => {
-      $('#pipeEditorAdd').click()
+      $('#pipeEditorAdd').click();
     },
     hasView: false,
     uploadURL: `${$('#pipeEditorComment').data('blogurl')}/upload`,
     fetchUpload: (url, succCB) => {
       $.ajax({
         url: `${$('#pipeEditorComment').data('blogurl')}/fetch-upload`,
-        type: 'POST',
+        type: "POST",
         data: JSON.stringify({
-          url,
+          url
         }),
         success: function (result) {
           succCB(result.data.originalURL, result.data.url)
-        },
-      })
+        }
+      });
     },
     previewClass: 'pipe-content__reset',
     staticServePath: config.StaticServer || config.Server,
     change: (value, $preview) => {
       if ($.trim(value) === '' || !$preview) {
-        $preview && $preview.html('')
-        return
+        $preview && $preview.html('');
+        return;
       }
       $.ajax({
         url: `${config.Server}/api/console/markdown`,
-        type: 'POST',
+        type: "POST",
         data: JSON.stringify({
-          mdText: value,
+          mdText: value
         }),
         success: function (result) {
-          $preview.html(result.data.html)
+          $preview.html(result.data.html);
           LazyLoadImage()
           LazyLoadCSSImage()
           InitHljs()
           ParseMarkdown()
-        },
-      })
-    },
+        }
+      });
+    }
   })
 
   $b3logEditor.val(localStorage.getItem('pipeEditorComment'))
@@ -348,24 +338,24 @@ ${$it.data('label2')}`).click(function () {
     const $commentContent = $('#pipeEditorComment')
 
     if ($editorAdd.hasClass('disabled')) {
-      return
+      return;
     }
 
     if ($.trim($b3logEditor.val()).length === 0) {
       alert(label2)
-      return
+      return;
     }
 
     let requestData = {
       'articleID': $editor.data('id'),
-      'content': $b3logEditor.val(),
+      'content': $b3logEditor.val()
     }
 
     if ($editor.data('commentid')) {
       requestData.parentCommentID = $editor.data('commentid')
     }
 
-    $editorAdd.addClass('pipe-btn--disabled')
+    $editorAdd.addClass('disabled')
 
     $.ajax({
       url: `${$commentContent.data('blogurl')}/comments`,
@@ -378,13 +368,10 @@ ${$it.data('label2')}`).click(function () {
           const $comments = $('#pipeComments')
 
           if ($commentsCnt.length === 0) {
-            $comments.removeClass('pipe-comment__null').
-              unbind('click').
-              html(
-                `<div class="pipe-comment__header"><span id="pipeCommentsCnt">1</span>${label}</div><div>${result.data}</div>
+            $comments.removeClass('pipe-comment__null').unbind('click')
+              .html(`<div class="pipe-comment__header"><span id="pipeCommentsCnt">1</span>${label}</div><div>${result.data}</div>
 <nav class="pipe-comment__pagination fn-clear">
-    <span class="fn-right pipe-comment__btn" data-text="${$comments.data(
-                  'title')}" data-id="${$editor.data('id')}" id="pipeCommentBottomComment">
+    <span class="fn-right pipe-comment__btn" data-text="${$comments.data('title')}" data-id="${$editor.data('id')}" id="pipeCommentBottomComment">
          <svg><use xlink:href="#icon-reply"></use></svg> ${label}
     </span>
 </nav>`)
@@ -394,10 +381,7 @@ ${$it.data('label2')}`).click(function () {
           }
 
           if ($(this).data('editable')) {
-            $('#pipeComments > div > section').
-              last().
-              find('.pipe-comment__btn--danger').
-              removeClass('pipe-comment__btn--none')
+            $('#pipeComments > div > section').last().find('.pipe-comment__btn--danger').removeClass('pipe-comment__btn--none')
           }
 
           LazyLoadCSSImage()
@@ -410,8 +394,8 @@ ${$it.data('label2')}`).click(function () {
         } else {
           alert(result.msg)
         }
-        $editorAdd.removeClass('pipe-btn--disabled')
-      },
+        $editorAdd.removeClass('disabled')
+      }
     })
   })
 }

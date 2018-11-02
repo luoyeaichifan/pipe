@@ -2,7 +2,7 @@
  * form.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.2.0.0, Nov 1, 2018
+ * @version 0.1.0.0, Oct 11, 2017
  */
 
 .pipe-form {
@@ -64,9 +64,7 @@
     margin-top: 2px;
   }
 
-  &:disabled,
-  &--disabled {
-    cursor: not-allowed;
+  &:disabled {
     opacity: 0.3;
   }
 

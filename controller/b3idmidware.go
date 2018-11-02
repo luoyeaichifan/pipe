@@ -22,9 +22,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/b3log/pipe/model"
-	"github.com/b3log/pipe/service"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/model"
+	"github.com/luoyeaichifan/pipe/service"
+	"github.com/luoyeaichifan/pipe/util"
 	"github.com/gin-gonic/gin"
 	"github.com/mssola/user_agent"
 	"github.com/parnurzeal/gorequest"
@@ -62,7 +62,7 @@ func fillUser(c *gin.Context) {
 		return
 	}
 
-	if strings.Contains(c.Request.URL.Path, util.PathAPIsSymArticle) || strings.Contains(c.Request.URL.Path, util.PathAPIsSymComment) { // https://github.com/b3log/pipe/issues/138
+	if strings.Contains(c.Request.URL.Path, util.PathAPIsSymArticle) || strings.Contains(c.Request.URL.Path, util.PathAPIsSymComment) { // https://github.com/luoyeaichifan/pipe/issues/138
 		c.Next()
 
 		return
@@ -76,7 +76,7 @@ func fillUser(c *gin.Context) {
 		return
 	case "":
 		redirectURL := model.Conf.Server + c.Request.URL.Path
-		if "/admin/" == c.Request.URL.Path { // https://github.com/b3log/pipe/issues/67
+		if "/admin/" == c.Request.URL.Path { // https://github.com/luoyeaichifan/pipe/issues/67
 			redirectURL = model.Conf.Server + c.Request.URL.Path
 		}
 		if strings.HasPrefix(c.Request.URL.Path, util.PathBlogs) {

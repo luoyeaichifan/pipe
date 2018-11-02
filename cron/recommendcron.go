@@ -21,8 +21,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/b3log/pipe/model"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/model"
+	"github.com/luoyeaichifan/pipe/util"
 	"github.com/parnurzeal/gorequest"
 )
 

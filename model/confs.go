@@ -28,22 +28,22 @@ import (
 	"strings"
 	"time"
 
-	"github.com/b3log/pipe/log"
+	"github.com/luoyeaichifan/pipe/log"
 	"github.com/jinzhu/gorm"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/util"
 )
 
 // Logger
 var logger = log.NewLogger(os.Stdout)
 
 // Version of Pipe.
-const Version = "1.8.3"
+const Version = "1.8.2"
 
 // Conf of Pipe.
 var Conf *Configuration
 
 // UserAgent represents HTTP client user agent.
-var UserAgent = "Pipe/" + Version + "; +https://github.com/b3log/pipe"
+var UserAgent = "Pipe/" + Version + "; +https://github.com/luoyeaichifan/pipe"
 
 // Models represents all models..
 var Models = []interface{}{

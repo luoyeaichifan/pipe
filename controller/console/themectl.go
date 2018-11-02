@@ -19,10 +19,10 @@ package console
 import (
 	"net/http"
 
-	"github.com/b3log/pipe/model"
-	"github.com/b3log/pipe/service"
-	"github.com/b3log/pipe/theme"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/model"
+	"github.com/luoyeaichifan/pipe/service"
+	"github.com/luoyeaichifan/pipe/theme"
+	"github.com/luoyeaichifan/pipe/util"
 	"github.com/gin-gonic/gin"
 )
 

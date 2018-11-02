@@ -21,11 +21,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/b3log/pipe/service"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/service"
+	"github.com/luoyeaichifan/pipe/util"
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
-	"github.com/b3log/pipe/model"
+	"github.com/luoyeaichifan/pipe/model"
 )
 
 // BlogSwitchAction switches blog.

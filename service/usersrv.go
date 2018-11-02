@@ -19,9 +19,9 @@ package service
 import (
 	"sync"
 
-	"github.com/b3log/pipe/cache"
-	"github.com/b3log/pipe/model"
-	"github.com/b3log/pipe/util"
+	"github.com/luoyeaichifan/pipe/cache"
+	"github.com/luoyeaichifan/pipe/model"
+	"github.com/luoyeaichifan/pipe/util"
 )
 
 // User service.
